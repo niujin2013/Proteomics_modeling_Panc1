@@ -1,5 +1,5 @@
 %% ciap 
-global time y time_s ypred; 
+global time y time_s ypred ; 
 time = [6 24 48 72 ] ; % repmat(time',1,3); 
 % cIAP1 
 options = statset('Display' , 'iter' );
@@ -79,21 +79,7 @@ out = [Names ; out ];
 xlswrite('Pred ciap&pp65',out)
 proteins = ["cIAP1", "pNFkB/NFkB"] ; 
 k=0; 
-% for i = 1:3:(size(y,1)/4)
-%     k =k +1; 
-%     %figure()
-%     plot(time , yp(:,i ),'bs' ,...
-%          time ,yp(:,i+1 ),'rs' ,...
-%          time ,yp(:,i+2 ),'ms'  )
-%     hold on
-%     plot(time_s,ypred((1+(i-1)*721 ):(721*i) ), 'b-', ...
-%         time_s,ypred((1+i*721 ):(721*(i+1)) ), 'r-', ...
-%         time_s,ypred((1+(i+1)*721 ):(721*(i+2)) ), 'm-')
-%     title( proteins(k))
-%     xlabel("Time, h" )
-%     set(gca,'fontsize',17)  
-%     hold off     
-% end
+
 
 CV = (diag( sqrt(diag(CovB)).*100 ./abs(beta))  )';
 pars_ci = nlparci(beta,R,'jacobian',J,'alpha',0.05 ) ;
@@ -171,19 +157,7 @@ out = [[ time_s time_s time_s  ]; lower; ypred; upper ]';
 Names = ["time_s" "Lower" "Pred" "Upper"  ]; 
 out = [Names ; out ]; 
 xlswrite('Pred w limits pjnk',out)
-% fig = figure(4)
-% h= plot(time , y( 1:4 ),'bs',...
-%     time ,y(5:8 ), 'rs' ,...
-%     time ,y(9:12), 'ms'  ) 
-% hold on 
-% plot(time_s,ypred(1:721 ), 'b-', ...
-%     time_s,ypred(722:(721*2 )), 'r-', ...
-%     time_s,ypred((721*2+1):(721*3) ), 'm-') 
-% set(h,{'markers'},{10;10;10}) 
-% set(findall(gcf,'Type','line'),'LineWidth',2)
-% hold off 
-% title ('pJNK/JNK')
-% set(gca,'fontsize',17) 
+
 fig = plotfig('pJNK'); 
 % save everything 
 saveas(fig,'fitppjnk')
@@ -211,19 +185,7 @@ out = [[ time_s time_s time_s  ]; lower; ypred; upper ]';
 Names = ["time_s" "Lower" "Pred" "Upper"  ]; 
 out = [Names ; out ]; 
 xlswrite('Pred w limits VDAC1',out)
-% fig = figure(5)
-% h= plot(time , y( 1:4 ),'bs',...
-%     time ,y(5:8 ), 'rs' ,...
-%     time ,y(9:12), 'ms'  ) 
-% hold on 
-% plot(time_s,ypred(1:721 ), 'b-', ...
-%     time_s,ypred(722:(721*2 )), 'r-', ...
-%     time_s,ypred((721*2+1):(721*3) ), 'm-') 
-% hold off 
-% set(h,{'markers'},{10;10;10}) 
-% set(findall(gcf,'Type','line'),'LineWidth',2)
-% title ('VDAC1')
-% set(gca,'fontsize',17) 
+
 fig = plotfig('VDAC1'); 
 % save everything 
 saveas(fig,'fitpVDAC1')
@@ -253,20 +215,7 @@ Names = ["time_s" "Lower" "Pred" "Upper"  ];
 out = [Names ; out ]; 
 xlswrite('Pred w limits pSTAT3',out)
 fig = plotfig('pSTAT3'); 
-% fig = figure(6)
-% 
-% h= plot(time , y( 1:4 ),'bs',...
-%     time ,y(5:8 ), 'rs' ,...
-%     time ,y(9:12), 'ms'  ) 
-% hold on 
-% plot(time_s,ypred(1:721 ), 'b-', ...
-%     time_s,ypred(722:(721*2 )), 'r-', ...
-%     time_s,ypred((721*2+1):(721*3) ), 'm-') 
-% hold off 
-% set(h,{'markers'},{10;10;10}) 
-% set(findall(gcf,'Type','line'),'LineWidth',2)
-% title ('pSTAT3/STAT3')
-% set(gca,'fontsize',17) 
+
 % save everything 
 saveas(fig,'fitpSTAT3')
 saveas(fig,'fitpSTAT3.png')
@@ -295,20 +244,7 @@ Names = ["time_s" "Lower" "Pred" "Upper"  ];
 out = [Names ; out ]; 
 xlswrite('Pred w limits BCL2',out)
 fig  =plotfig('Bcl2'); 
-% 
-% fig = figure(7)
-% h =plot(time , y( 1:4 ),'bs',...
-%     time ,y(5:8 ), 'rs' ,...
-%     time ,y(9:12), 'ms'  ) 
-% hold on 
-% plot(time_s,ypred(1:721 ), 'b-', ...
-%     time_s,ypred(722:(721*2 )), 'r-', ...
-%     time_s,ypred((721*2+1):(721*3) ), 'm-') 
-% hold off 
-% set(h,{'markers'},{10;10;10}) 
-% set(findall(gcf,'Type','line'),'LineWidth',2)
-% title ('BCL2')
-% set(gca,'fontsize',17) 
+
 % save everything 
 saveas(fig,'fitBCL2')
 saveas(fig,'fitBCL2.png')
@@ -336,20 +272,7 @@ Names = ["time_s" "Lower" "Pred" "Upper"  ];
 out = [Names ; out ]; 
 xlswrite('Pred w limits ELYS',out)
 fig =plotfig('ELYS'); 
-% fig = figure(8)
-% h =plot(time , y( 1:4 ),'bs',...
-%     time ,y(5:8 ), 'rs' ,...
-%     time ,y(9:12), 'ms'  ) 
-% hold on 
-% plot(time_s,ypred(1:721 ), 'b-', ...
-%     time_s,ypred(722:(721*2 )), 'r-', ...
-%     time_s,ypred((721*2+1):(721*3) ), 'm-') 
-% hold off 
-% set(h,{'markers'},{10;10;10}) 
-% set(findall(gcf,'Type','line'),'LineWidth',2)
-% title ('ELYS')
-% set(gca,'fontsize',17) 
-% save everything 
+
 saveas(fig,'fitELYS')
 saveas(fig,'fitELYS.png')
 
@@ -377,20 +300,7 @@ Names = ["time_s" "Lower" "Pred" "Upper"  ];
 out = [Names ; out ]; 
 xlswrite('Pred w limits ASPP2',out)
 fig = plotfig('ASPP2') ; 
-% fig = figure(9)
-% h =plot(time , y( 1:4 ),'bs',...
-%     time ,y(5:8 ), 'rs' ,...
-%     time ,y(9:12), 'ms'  ) 
-% hold on 
-% plot(time_s,ypred(1:721 ), 'b-', ...
-%     time_s,ypred(722:(721*2 )), 'r-', ...
-%     time_s,ypred((721*2+1):(721*3) ), 'm-') 
-% hold off 
-% set(h,{'markers'},{10;10;10}) 
-% set(findall(gcf,'Type','line'),'LineWidth',2)
-% title ('ASPP2')
-% set(gca,'fontsize',17) 
-% % save everything 
+
 saveas(fig,'fitASPP2')
 saveas(fig,'fitASPP2.png')
 
@@ -399,78 +309,6 @@ pars_ci = nlparci(beta,R,'jacobian',J,'alpha',0.05 ) ;
 show = [ beta'  CV' pars_ci  ]
 xlswrite('parameter seq',show, 'ASPP2');
 
-% %% cCasp3 (not modeled because it maybe concurrent with Annexin V already)  <- BAX;|-BCL2 ; <- ASPP2
-% beta_prev  = forcasp3;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% input parameters from xls file; 
-% cCasp3=  xlsread('C:\Users\jinniu\Documents\MATLAB\new panc1 proteins\cCasp3\cCasp3.xlsx', 'B3:B14'); 
-% y = cCasp3(1:8) ; 
-% yp= reshape(y, 4, size(y,1)/4 ) ;  % for plot purpose
-% % nonlinear regression
-% beta0 = [0.01 5 0.5 ]; 
-% [beta,R,J,CovB,MSE,ErrorModelInfo] = nlinfit(time, y', 'ynewfitcCasp3',beta0 ,options);
-% time_s = 0:0.1:72; 
-% [ypred,delta] = nlpredci('ynewfitcCasp3',time_s , beta,R,'Covar',CovB,'MSE',MSE); 
-% lower = ypred - delta;
-% upper = ypred + delta;
-% out = [[ time_s time_s time_s  ]; lower; ypred; upper ]'; 
-% Names = ["time_s" "Lower" "Pred" "Upper"  ]; 
-% out = [Names ; out ]; 
-% xlswrite('Pred w limits cCasp3',out)
-% fig = figure(2)
-% plot(time , y( 1:4 ),'bs',...
-%     time ,y(5:8 ), 'rs'  ,...
-%     time ,y(9:12), 'ms'  ) 
-% hold on 
-% plot(time_s,ypred(1:721 ), 'b-', ...
-%     time_s,ypred(722:(721*2 )), 'r-', ...
-%     time_s,ypred((721*2+1):(721*3) ), 'm-') 
-% hold off 
-% title ('cCasp3')
-% set(gca,'fontsize',17) 
-% % save everything 
-% saveas(fig,'fitcCasp3')
-% saveas(fig,'fitcCasp3.png')
-% 
-% CV = (diag( sqrt(diag(CovB)).*100 ./abs(beta))  )';
-% pars_ci = nlparci(beta,R,'jacobian',J,'alpha',0.05 ) ;
-% show = [ beta'  CV' pars_ci  ]
-% xlswrite('parameter seq',show, 'cCasp3');
-
-%% fit proteins simutaneously could not converge 
-% y =  [IRAK4 ; pJNK ; pSTAT3 ; VDAC1 ; ciap ; pp65 ; BCL2 ; ELYS ; ASPP2 ; bax ]  ;
-% yp= reshape(y,4,size(y,1)/4 ) ;  % for plot purpose
-% options = statset('Display', 'iter','TolX' , 1e-12, 'TolFun', 1e-12, ...
-%     'MaxIter',1e+12 );
-% % nonlinear regression for pNFKB/NFKB 
-% beta0 =forcasp3  ; 
-% [beta,R,J,CovB,MSE,ErrorModelInfo] = nlinfit(time, y', 'ynewfitall',beta0 ,options);
-% 
-% time_s = 0:0.1:72; 
-% [ypred,delta] = nlpredci('ynewfitASPP2',time_s , beta,R,'Covar',CovB,'MSE',MSE); 
-% lower = ypred - delta;
-% upper = ypred + delta;
-% out = [[ time_s time_s time_s  ]; lower; ypred; upper ]'; 
-% Names = ["time_s" "Lower" "Pred" "Upper"  ]; 
-% out = [Names ; out ]; 
-% xlswrite('Pred w limits ASPP2',out)
-% fig = figure(2)
-% plot(time , y( 1:4 ),'bs',...
-%     time ,y(5:8 ), 'rs' ,...
-%     time ,y(9:12), 'ms'  ) 
-% hold on 
-% plot(time_s,ypred(1:721 ), 'b-', ...
-%     time_s,ypred(722:(721*2 )), 'r-', ...
-%     time_s,ypred((721*2+1):(721*3) ), 'm-') 
-% hold off 
-% title ('ASPP2')
-% set(gca,'fontsize',17) 
-% % save everything 
-% saveas(fig,'fitASPP2')
-% saveas(fig,'fitASPP2.png')
-% 
-% CV = (diag( sqrt(diag(CovB)).*100 ./abs(beta))  )';
-% pars_ci = nlparci(beta,R,'jacobian',J,'alpha',0.05 ) ;
-% show = [ beta'  CV' pars_ci  ]
-% xlswrite('parameter seq',show, 'ASPP2');
 
 
 %% fit with cycle
