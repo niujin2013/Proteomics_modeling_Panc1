@@ -1,0 +1,43 @@
+% ynew fit.m 
+%
+% Returns expected infection values given a set of time points and 
+%   coefficients 
+% Inputs: 
+% a – List of free parameter values 
+% x – List of time points of interest 
+% Output: 
+% y – A list of expected value for each time 
+%     point in ‘x’. 
+function sim = ynewfitpp65(param, time) 
+  % Define beta and delta as globals so we can pass the values into the ‘IDR1’ function.
+  global  pp65_ciap;  % = param() ;  
+  pp65_ciap = param(1) ;
+  
+  % previous fitted parameters ; 
+  
+  i =6 ;   
+  % Solve our model.  
+  [t, sim] = ode15s(@IDRnewpp65 , [0 time(end)], ones(1,i )) ; %ODE(dF, [T], [ICS])
+
+  % We will use the built-in interpolation function interp1 to get 
+  % values of infected people at that correspond to the proper time 
+  % points. 
+  sim = log2([ interp1(t, sim(:,4) , time ) , ...
+             interp1(t, sim(:,5) , time ) , ...
+             interp1(t, sim(:,6) , time ) , ...           
+             ]) ;
+         
+         
+
+%              , ... ,...
+%              interp1(t, y(:,16) , x),...
+%              interp1(t, y(:,17) , x), ...
+%              interp1(t, y(:,18) , x),...
+%              interp1(t, y(:,19) , x)  
+%              interp1(t, y(:,13) , x),...
+%              interp1(t, y(:,14) , x),...
+%              interp1(t, y(:,15) , x) ,...
+%              interp1(t, y(:,16) , x),...
+%              interp1(t, y(:,17) , x), ...
+%              interp1(t, y(:,18) , x),...
+%              interp1(t, y(:,19) , x)     
