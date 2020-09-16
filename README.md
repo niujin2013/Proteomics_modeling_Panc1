@@ -8,4 +8,4 @@
 	Model:cycleonly_2.for
 3. Integrate protein network with cell cycle: 
 	Data: Protein data.xlsx; 
-	Model: try5_forplot.m (with functions "ynewfitXXXX.m")
+	Model: try5.m (with functions such as "ynewfitXXXX.m")
